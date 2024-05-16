@@ -1,29 +1,37 @@
 import Image from 'next/image'
 
 export default function Explore() {
-const artistList = [
-  {
-    id: 1,
-    artistDisplayName: 'Vincent van Gogh',
-    artistBeginDate: 1853,
-    deathYear: 1890,
-    imageURL: 'https://images.metmuseum.org/CRDImages/ep/web-large/DP130999.jpg'
-  },
-  {
-    id: 2,
-    artistDisplayName: 'Rembrandt van Rijn',
-    artistBeginDate: 1881,
-    deathYear: 1973,
-    imageURL: 'https://images.metmuseum.org/CRDImages/ep/web-large/DP145909.jpg'
-  },
-  {
-    id: 3,
-    artistDisplayName: 'Johannes Vermeer',
-    artistBeginDate: 1452,
-    deathYear: 1519,
-    imageURL: 'https://images.metmuseum.org/CRDImages/ep/web-large/DP145924.jpg'
+  type Artist = {
+    id: number,
+    artistDisplayName: string,
+    artistBeginDate: number,
+    deathYear: number,
+    imageURL: string
   }
-]
+
+  const artistList: Artist[] = [
+    {
+      id: 1,
+      artistDisplayName: 'Vincent van Gogh',
+      artistBeginDate: 1853,
+      deathYear: 1890,
+      imageURL: 'https://images.metmuseum.org/CRDImages/ep/web-large/DP130999.jpg'
+    },
+    {
+      id: 2,
+      artistDisplayName: 'Rembrandt van Rijn',
+      artistBeginDate: 1881,
+      deathYear: 1973,
+      imageURL: 'https://images.metmuseum.org/CRDImages/ep/web-large/DP145909.jpg'
+    },
+    {
+      id: 3,
+      artistDisplayName: 'Johannes Vermeer',
+      artistBeginDate: 1452,
+      deathYear: 1519,
+      imageURL: 'https://images.metmuseum.org/CRDImages/ep/web-large/DP145924.jpg'
+    }
+  ]
 
   return (
     <div className='max-w-screen-lg mx-auto p-5'>
@@ -34,7 +42,7 @@ const artistList = [
           <div className="card w-96 bg-base-100 shadow-xl m-6" key={index}>
             <Image
               src={artist.imageURL}
-              alt="sample"
+              alt={artist.artistDisplayName}
               width={400}
               height={400}
             />
