@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Navbar() {
   return (
@@ -14,7 +15,11 @@ export default function Navbar() {
         <div className="max-w-md">
           <h1 className="mb-5 text-5xl font-bold">Art Timeline</h1>
           <p className="mb-5">Explore the Art of Time: Journey through centuries of creativity, from ancient masterpieces to modern expressions. Discover how art has shaped history and continues to inspire the world today. Dive into the 'Art Timeline' and let each stroke tell its story.</p>
-          <button className="btn btn-primary">Get Started</button>
+          <Link href='/explore'>
+            <button className="btn btn-primary" aria-current="page">
+                Get Started
+            </button>
+          </Link>
         </div>
       </div>
     </div>

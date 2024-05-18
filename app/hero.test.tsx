@@ -1,5 +1,24 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Hero from './hero';
+import { Router } from 'next/router';
+import mockRouter from 'next-router-mock';
+import userEvent from '@testing-library/user-event';
+import { ReactNode } from 'react';
+
+jest.mock('next/router', () => require('next-router-mock'));
+
+jest.mock('next/link', () => {
+  interface MockLinkProps {
+    children: ReactNode;
+    href: string;
+  }
+
+  const MockLink = ({ children, href }: MockLinkProps) => {
+    return <a href={href} onClick={() => mockRouter.push(href)}>{children}</a>;
+  };
+  MockLink.displayName = 'Link';
+  return MockLink;
+});
 
 describe('Hero component', () => {
   beforeEach(() => {
@@ -19,5 +38,13 @@ describe('Hero component', () => {
   test('renders get started button', () => {
     const getStartedButton = screen.getByRole('button', { name: /get started/i });
     expect(getStartedButton).toBeInTheDocument();
+  });
+
+  test('navigates to /explore when get started button is clicked', async () => {
+    mockRouter.setCurrentUrl('/');
+    const getStartedButton = screen.getByRole('button', { name: /get started/i });
+    userEvent.click(getStartedButton);
+
+    await waitFor(() => expect(mockRouter.asPath).toEqual('/explore'));
   });
 })
