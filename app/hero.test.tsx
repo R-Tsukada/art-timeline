@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import Hero from './hero';
+import { Router } from 'next/router';
 import mockRouter from 'next-router-mock';
 import userEvent from '@testing-library/user-event';
 import { ReactNode } from 'react';
@@ -13,9 +14,8 @@ jest.mock('next/link', () => {
   }
 
   const MockLink = ({ children, href }: MockLinkProps) => {
-    console.log({children, href})
     return <a href={href} onClick={() => mockRouter.push(href)}>{children}</a>;
-  }
+  };
   MockLink.displayName = 'Link';
   return MockLink;
 });
@@ -44,6 +44,7 @@ describe('Hero component', () => {
     mockRouter.setCurrentUrl('/');
     const getStartedButton = screen.getByRole('button', { name: /get started/i });
     userEvent.click(getStartedButton);
+
     await waitFor(() => expect(mockRouter.asPath).toEqual('/explore'));
   });
 })
