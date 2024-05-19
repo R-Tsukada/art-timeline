@@ -54,14 +54,14 @@ export default function Explore() {
 
   return (
     <div className='max-w-screen-lg mx-auto p-5'>
-      <h2 className='text-2xl text-center font-semibold mb-6'>Discover the Ages: Explore Masterpieces by Artist</h2>
-      <p className='m-6 text-pretty'>Select an Artist: Explore the masterpieces crafted by renowned artists and dive deep into their unique styles and contributions to the world of art.</p>
-      <div className='flex justify-between w-full'>
+      <h2 className='text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center font-semibold mb-6'>Discover the Ages: Explore Masterpieces by Artist</h2>
+      <p className='m-6 text-pretty text-sm sm:text-base md:text-lg'>Select an Artist: Explore the masterpieces crafted by renowned artists and dive deep into their unique styles and contributions to the world of art.</p>
+      <div className='flex justify-between flex-wrap justify-center md:justify-center w-full'>
         {artistList.map((artist, index) => (
           <div
             key={index}
             className={clsx(
-              "card w-96 bg-base-100 shadow-xl m-6",
+              "card w-80 sm:w-48 md:w-64 bg-base-100 shadow-xl m-6",
             {
               'bg-blue-100': artist.selected
             }
@@ -74,10 +74,10 @@ export default function Explore() {
               height={400}
             />
             <div className="card-body">
-              <h2 className="card-title">{artist.artistDisplayName}</h2>
+              <p className="card-title text-sm sm:text-base md:text-lg font-semibold">{artist.artistDisplayName}</p>
               <p>{artist.artistBeginDate} - {artist.deathYear}</p>
               <div className="card-actions justify-end">
-                <button className="btn btn-primary" onClick={() => handleArtistClick(artist.id)}>Select</button>
+                <button className="btn btn-primary w-full sm:w-auto h-10 sm:h-12 md:h-14 lg:h-16" onClick={() => handleArtistClick(artist.id)}>Select</button>
               </div>
             </div>
           </div>
