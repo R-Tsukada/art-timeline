@@ -1,6 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import Hero from './hero';
-import { Router } from 'next/router';
 import mockRouter from 'next-router-mock';
 import userEvent from '@testing-library/user-event';
 import { ReactNode } from 'react';
@@ -45,6 +44,6 @@ describe('Hero component', () => {
     const getStartedButton = screen.getByRole('button', { name: /get started/i });
     userEvent.click(getStartedButton);
 
-    await waitFor(() => expect(mockRouter.asPath).toEqual('/explore'));
+    await waitFor(() => expect(mockRouter.asPath).toBe('/explore'));
   });
 })

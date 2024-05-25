@@ -34,6 +34,6 @@ describe('Navbar component', () => {
     const getStartedButton = screen.getByRole('link', { name: /Art Timeline/i});
     userEvent.click(getStartedButton);
 
-    await waitFor(() => expect(mockRouter.asPath).toEqual('/'))
+    await waitFor(() => expect(mockRouter.asPath).toBe('/'))
   })
 })

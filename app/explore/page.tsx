@@ -49,6 +49,8 @@ export default function Explore() {
       return { ...artist, selected: artist.id === id }
     })
     setArtistId(id)
+    // デバッグ用
+    console.log(artistId)
     setArtistList(updatedArtistList)
   }
 
