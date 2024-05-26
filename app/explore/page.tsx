@@ -2,6 +2,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import clsx from 'clsx'
+import Link from 'next/link'
 
 export default function Explore() {
   const [artistId, setArtistId] = useState<number>(0)
@@ -95,6 +96,11 @@ export default function Explore() {
             </div>
           </div>
         ))}
+      </div>
+      <div className='flex justify-center'>
+        <Link href={`/artist/${artistId}`}>
+          <button className='btn btn-primay'>Start</button>
+        </Link>
       </div>
     </div>
   )

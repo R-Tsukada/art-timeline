@@ -2,6 +2,27 @@ import Explore from './page'
 import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import mockRouter from 'next-router-mock'
+import { ReactNode } from 'react'
+
+jest.mock('next/router', () => require('next-ruter-mock'))
+
+jest.mock('next/link', () => {
+  interface MockLinkProps {
+    children: ReactNode
+    href: string
+  }
+
+  const MockLink = ({ children, href }: MockLinkProps) => {
+    return (
+      <a href={href} onClick={() => mockRouter.push(href)}>
+        {children}
+      </a>
+    )
+  }
+  MockLink.displayName = 'Link'
+  return MockLink
+})
 
 describe('Explore component', () => {
   test('renders Explore component', () => {
@@ -50,5 +71,16 @@ describe('Explore component', () => {
         expect(deselectedCard).not.toHaveClass('bg-blue-100')
       })
     })
+  })
+
+  test('navigate to /artist/[artistName] when get started button is clicked', async () => {
+    render(<Explore />)
+    mockRouter.setCurrentUrl('/explore')
+    const selectButtons = screen.getAllByText('Select')
+    await userEvent.click(selectButtons[0])
+    const startButton = screen.getByRole('button', { name: /start/i })
+    expect(startButton).toBeInTheDocument()
+    await userEvent.click(startButton)
+    expect(mockRouter.asPath).toBe('/artist/1')
   })
 })
